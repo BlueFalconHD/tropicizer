@@ -1,73 +1,70 @@
 <!DOCTYPE html>
 <html>
+
 <body>
 
-<h2>Upload Minecraft Skin</h2>
-<form action="">
-  <input type="file" id="minecraftSkin" name="minecraftSkin">
-  <br><br>
-  <input type="button" value="Submit" onclick="processImage()">
-</form>
+    <h2>Upload Minecraft Skin</h2>
+    <form action="">
+        <input type="file" id="minecraftSkin" name="minecraftSkin">
+        <br><br>
+        <input type="button" value="Submit" onclick="processImage()">
+    </form>
 
-<canvas id="skin_container"></canvas>
-<a id="download" href="" download="ModifiedSkin.png">Download</a>
+    <canvas id="skin_container"></canvas>
+    <a id="download" href="" download="ModifiedSkin.png">Download</a>
 
-<script src="./skinview3d.bundle.js"></script>
-<script>
+    <script src="https://path.to/skinview3d.js"></script>
+    <script>
 
-// Initialize the skin viewer
-let skinViewer = new skinview3d.SkinViewer({
-	canvas: document.getElementById("skin_container"),
-	width: 300,
-	height: 400,
-});
+        // Initialize the skin viewer
+        let skinViewer = new skinview3d.SkinViewer({
+            canvas: document.getElementById("skin_container"),
+            width: 300,
+            height: 400,
+        });
 
-function processImage() {
-    let skinFile = document.getElementById('minecraftSkin').files[0];
-    let reader = new FileReader();
-    
-    reader.onload = function(e) {
-        // Create a new canvas to overlay the images and set its size
-        let canvas = document.createElement('canvas');
-        let context = canvas.getContext('2d');
-        
-        // Size of standard Minecraft skin (64x64 or 64x32)
-        canvas.width = 64;
-        canvas.height = 64;
-        
-        let skinImage = new Image();
-        skinImage.src = e.target.result;
-        
-        skinImage.onload = function() {
-            // Draw the Minecraft skin
-            context.drawImage(skinImage, 0, 0, 64, 64);
-            
-            // Load the overlay image (replace with your base64 image)
-            let overlayImage = new Image();
-            overlayImage.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAdVJREFUeJzt2rFugkAYB/C/pjGxYbRxJUxN00HfwoGBwfgKXfoKTu6dXJy7EQcHB9/CxRgn48BiykgkcZBOZwFRIXfoNf5/I8IB5/d9B3cARERERERERPRoKqobXHheZE0CHLZhYnu1WQcAPH++Sp1zN1xFALB2DGx8H3arJdXek8zBWcTNG4N24sKC/jwSnaCC7XYw7c2k21HeAbeyrI2BSSDdTlXBtfxr0hEgcrKs/c9ZOwZst3PSnti+rI0BXK85pURAtVlH0J8fL0x1/osCmFUDrElwvPk8tEmBtWPk3teaBDAbDdhuR/q8dy+Ch22IzccLNr4POA1YscKWHkrjzFGIBb6B5ml7Rdy9A4C/IS2eu0J6OFVNiw4QQ1qR3FWllBqQfhAyBu1K3tB823cL1QNZ2hRBYdqbYeP7N+sE5R2Q9RgM5I8C2+3AbCSLYZm0qAFxqh5x89IuBW5NiwgoOnYTERGREqW+aqoQn1nKkjX7fOl3IiIiIm3thqvI/HqPFp4XqVpHvESLGaG0W84LPvyc4MN3wN1fFIrmuVgaF2sHst8caRsBYonsbd9NbFe5NA5oHAHpf/oc2QjQbhQQawTmKIQJAPjBocDx1+YPiIiIiIRfGGS/7qTevXkAAAAASUVORK5CYII=';
+        function processImage() {
+            let skinFile = document.getElementById('minecraftSkin').files[0];
+            let reader = new FileReader();
 
-            overlayImage.onload = function() {
-                // Overlay the transparent image
-                context.drawImage(overlayImage, 0, 0, 64, 64);
+            reader.onload = function (e) {
+                // Create a new canvas to overlay the images
+                let canvas = new OffscreenCanvas(64, 64);
+                let context = canvas.getContext('2d');
 
-                // Convert canvas to data URL
-                let dataURL = canvas.toDataURL('image/png');
-                
-                // Update the skin viewer
-                skinViewer.loadSkin(dataURL);
-                
-                // Update the download link
-                document.getElementById('download').href = dataURL;
+                let skinImage = new Image();
+                skinImage.src = e.target.result;
+
+                skinImage.onload = function () {
+                    // Draw the Minecraft skin
+                    context.drawImage(skinImage, 0, 0);
+
+                    // Load the overlay image (replace with your base64 image)
+                    let overlayImage = new Image();
+                    overlayImage.src = 'data:image/png;base64,...';
+
+                    overlayImage.onload = function () {
+                        // Overlay the transparent image
+                        context.drawImage(overlayImage, 0, 0);
+
+                        // Convert canvas to data URL
+                        let dataURL = canvas.toDataURL('image/png');
+
+                        // Update the skin viewer
+                        skinViewer.loadSkin(dataURL);
+
+                        // Update the download link
+                        document.getElementById('download').href = dataURL;
+                    };
+                };
             };
-        };
-    };
 
-    // Start reading the skin file
-    reader.readAsDataURL(skinFile);
-}
+            // Start reading the skin file
+            reader.readAsDataURL(skinFile);
+        }
 
-</script>
+    </script>
 
 </body>
-</html>
 
+</html>
