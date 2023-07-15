@@ -13,7 +13,7 @@
     <canvas id="skin_container"></canvas>
     <a id="download" href="" download="ModifiedSkin.png">Download</a>
 
-    <script src="https://path.to/skinview3d.js"></script>
+    <script src="./skinview3d.bundle.js"></script>
     <script>
 
         // Initialize the skin viewer
@@ -41,7 +41,7 @@
 
                     // Load the overlay image (replace with your base64 image)
                     let overlayImage = new Image();
-                    overlayImage.src = 'data:image/png;base64,...';
+                    overlayImage.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAdVJREFUeJzt2rFugkAYB/C/pjGxYbRxJUxN00HfwoGBwfgKXfoKTu6dXJy7EQcHB9/CxRgn48BiykgkcZBOZwFRIXfoNf5/I8IB5/d9B3cARERERERERPRoKqobXHheZE0CHLZhYnu1WQcAPH++Sp1zN1xFALB2DGx8H3arJdXek8zBWcTNG4N24sKC/jwSnaCC7XYw7c2k21HeAbeyrI2BSSDdTlXBtfxr0hEgcrKs/c9ZOwZst3PSnti+rI0BXK85pURAtVlH0J8fL0x1/osCmFUDrElwvPk8tEmBtWPk3teaBDAbDdhuR/q8dy+Ch22IzccLNr4POA1YscKWHkrjzFGIBb6B5ml7Rdy9A4C/IS2eu0J6OFVNiw4QQ1qR3FWllBqQfhAyBu1K3tB823cL1QNZ2hRBYdqbYeP7N+sE5R2Q9RgM5I8C2+3AbCSLYZm0qAFxqh5x89IuBW5NiwgoOnYTERGREqW+aqoQn1nKkjX7fOl3IiIiIm3thqvI/HqPFp4XqVpHvESLGaG0W84LPvyc4MN3wN1fFIrmuVgaF2sHst8caRsBYonsbd9NbFe5NA5oHAHpf/oc2QjQbhQQawTmKIQJAPjBocDx1+YPiIiIiIRfGGS/7qTevXkAAAAASUVORK5CYII=';
 
                     overlayImage.onload = function () {
                         // Overlay the transparent image
